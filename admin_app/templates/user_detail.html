@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Admin Panel - User Detail</h1>
+    <p><strong>ID:</strong> {{ object.id }}</p>
+    <p><strong>Username:</strong> {{ object.username }}</p>
+    <p><strong>Email:</strong> {{ object.email }}</p>
+    <a href="{% url 'admin_app:user_edit' object.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'admin_app:user_delete' object.id %}" class="btn btn-danger">Delete</a>
+{% endblock %}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Admin Panel - Users List -->
+<div class="container">
+    <h1>Admin Panel - Users List</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <a href="{% url 'admin:user_detail' user.id %}" class="btn btn-primary">View</a>
+                    <a href="{% url 'admin:user_edit' user.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'admin:user_delete' user.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Admin Panel - Redeem Codes -->
+<div class="container">
+    <h1>Admin Panel - Redeem Codes</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Value</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for redeem_code in redeem_codes %}
+            <tr>
+                <td>{{ redeem_code.code }}</td>
+                <td>{{ redeem_code.value }}</td>
+                <td>
+                    <a href="{% url 'admin:redeem_code_edit' redeem_code.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'admin:redeem_code_delete' redeem_code.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

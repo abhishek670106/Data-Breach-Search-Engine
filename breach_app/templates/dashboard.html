@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Dashboard</h1>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <div class="alert alert-info alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                </div>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="pull-right">
+                    <i class="fas fa-search" style="font-size: 28px"></i>
+                </div>
+                <p>CHECKS LEFT</p>
+                {% if not is_premium %}
+                    <h4>{{ search_left }}/3</h4>
+                {% else %}
+                    {% if premium_search_left %}
+                        <h4>{{ premium_search_left }}</h4>
+                    {% else %}
+                        <h4>Unlimited</h4>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <h4>Redeem Code</h4>
+          </div>
+          <div class="card-body">
+            <form method="POST" action="{% url 'redeem' %}">
+              {% csrf_token %}
+              <div class="form-group mt-4">
+                <label for="redeem_code">Redeem Code</label>
+                <input type="text" class="form-control" id="redeem_code" name="redeem_code" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Redeem</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Membership Status</h4>
+            </div>
+            <div class="card-body">
+                {% if is_premium %}
+                    <p class="text-success">Premium Member</p>
+                    {% if premium_search_left %}
+                        <p>Remaining Premium Credits: {{ premium_search_left }}</p>
+                    {% else %}
+                        <p>Remaining Premium Credits: Unlimited</p>
+                    {% endif %}
+                {% else %}
+                    <p class="text-danger">Free Member</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Admin Panel - Redeem Codes</h1>
+    <a href="{% url 'admin_app:redeem_code_add' %}" class="btn btn-primary">Add Redeem Code</a> <!-- New line to add the button -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Value</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for redeem_code in object_list %}
+            <tr>
+                <td>{{ redeem_code.code }}</td>
+                <td>{{ redeem_code.code_type }}</td>
+                <td>
+                    <a href="{% url 'admin_app:redeem_code_edit' redeem_code.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'admin_app:redeem_code_delete' redeem_code.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

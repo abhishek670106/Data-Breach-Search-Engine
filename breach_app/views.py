@@ -27,11 +27,10 @@ def indexx(request):
                     user_profile.search_count += 1
                     user_profile.save()
 
-        url = "https://breachdirectory.p.rapidapi.com/"
+        url = "https://breach/"
         querystring = {"func": "auto", "term": email}
         headers = {
-            "X-RapidAPI-Key": "245e3c9548msh3e717e9f123778ep1fb142jsn0f39f7811042",
-            "X-RapidAPI-Host": "breachdirectory.p.rapidapi.com"
+            
         }
         response = requests.request("GET", url, headers=headers, params=querystring)
         data = response.json()
